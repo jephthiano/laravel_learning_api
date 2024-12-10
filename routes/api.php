@@ -10,15 +10,15 @@ use App\Http\Controllers\UserController;
 Route::middleware([EnsureTokenIsValid::class])->group(function () {
 
     Route::get('/test', function (Request $request){
-        $name = $request->input('name', 'hmm');
-        var_export($name);
+        // $name = $request->cookie();
+        // var_export($name);
 
         $data = UserController::loadUsers();
-        return [
+        return response([
             "status" => true,
             "message" => "success",
             "responseData" => $data,
-        ];
+        ]);
     });
 
     Route::post('/test', function (Request $request){

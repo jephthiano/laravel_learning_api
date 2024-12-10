@@ -10,8 +10,8 @@ use App\Http\Controllers\UserController;
 Route::middleware([EnsureTokenIsValid::class])->group(function () {
 
     Route::get('/test', function (Request $request){
-        $name = $request->input('name');
-        var_export($request->ip()   );
+        $name = $request->input('name', 'hmm');
+        var_export($name);
 
         $data = UserController::loadUsers();
         return [

@@ -9,7 +9,22 @@ use App\Http\Controllers\UserController;
 
 Route::middleware([EnsureTokenIsValid::class])->group(function () {
 
-    Route::get('/test/{id?}', function (Request $request, ?string $id = '0'){
+    Route::get('/test', function (Request $request){
+        $name = $request->input('name');
+        var_export($request->ip()   );
+
+        $data = UserController::loadUsers();
+        return [
+            "status" => true,
+            "message" => "success",
+            "responseData" => $data,
+        ];
+    });
+
+    Route::post('/test', function (Request $request){
+        $name = $request->input('name');
+        var_export($name);
+
         $data = UserController::loadUsers();
         return [
             "status" => true,

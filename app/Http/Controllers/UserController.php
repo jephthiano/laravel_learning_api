@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
+    private static $response = [ "status" => false, "message" => "invalid inputs", "responseData" => [], "errorData" => []];
+
     public static function loadUsers(Request $request){
         $rules = [
             'title' => 'bail|required|unique:posts|max:255|min:6',
@@ -19,9 +21,16 @@ class UserController extends Controller
 
         // Check if validation fails
         if ($validator->fails()) {
-            // return error
-            $error = $validator->errors();
-            return $error;
+            //set error into
+            UserController::$response['errorData'] = $validator->errors();
+
+            return UserController::$response;
+            // [
+            //     "status" => false,
+            //     "message" => "invalid inputs",
+            //     "responseData" => [],
+            //     "errorData" => $error
+            // ];
         }
 
         $users = DB::select('select * from users');

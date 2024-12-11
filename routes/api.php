@@ -13,12 +13,8 @@ Route::middleware([EnsureTokenIsValid::class])->group(function () {
         // $name = $request->cookie();
         // var_export($name);
 
-        $data = UserController::loadUsers($request);
-        return response([
-            "status" => true,
-            "message" => "success",
-            "responseData" => $data,
-        ]);
+        $response = UserController::loadUsers($request);
+        return response($response);
     });
 
     Route::post('/test', function (Request $request){

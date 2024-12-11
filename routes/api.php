@@ -13,7 +13,7 @@ Route::middleware([EnsureTokenIsValid::class])->group(function () {
         // $name = $request->cookie();
         // var_export($name);
 
-        $data = UserController::loadUsers();
+        $data = UserController::loadUsers($request);
         return response([
             "status" => true,
             "message" => "success",

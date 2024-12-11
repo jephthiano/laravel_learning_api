@@ -23,17 +23,15 @@ class UserController extends Controller
         if ($validator->fails()) {
             //set error into
             UserController::$response['errorData'] = $validator->errors();
-
-            return UserController::$response;
-            // [
-            //     "status" => false,
-            //     "message" => "invalid inputs",
-            //     "responseData" => [],
-            //     "errorData" => $error
-            // ];
+        }else{
+            $users = DB::select('select * from users');
+            //set data
+            UserController::$response['status'] = true;
+            UserController::$response['message'] = "success";
+            UserController::$response['responseData'] = $users;
         }
 
-        $users = DB::select('select * from users');
+        return UserController::$response;
         return $users;
     }
 }

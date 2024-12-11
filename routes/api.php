@@ -17,10 +17,7 @@ Route::middleware([EnsureTokenIsValid::class])->group(function () {
         return response($response);
     });
 
-    Route::post('/test', function (Request $request){
-        $name = $request->input('name');
-        var_export($name);
-
+    Route::post('/login', function (Request $request){
         $data = UserController::loadUsers();
         return [
             "status" => true,

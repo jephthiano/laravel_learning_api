@@ -6,11 +6,14 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
+use App\Http\Controllers\Misc\General;
+
 class Auth
 {
     private static $response = [ "status" => false, "message" => "invalid inputs", "responseData" => [], "errorData" => []];
 
     public static function login(Request $request){
+        $response = General::$response;
         // $rules = [
         //     'login_id' => 'required',
         //     'password' => 'required',
@@ -26,10 +29,10 @@ class Auth
         // }else{
             $users = DB::select('select * from users');
             //set data
-            Auth::$response['status'] = true;
-            Auth::$response['message'] = "success";
-            Auth::$response['responseData'] = $users;
+            $response['status'] = true;
+            $response['message'] = "success";
+            $response['responseData'] = $users;
         // }
-        return Auth::$response;
+        return $response;
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\EnsureTokenIsValid;
 
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\Core\UserController;
 
 
 Route::middleware([EnsureTokenIsValid::class])->group(function () {

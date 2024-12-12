@@ -9,21 +9,20 @@ use App\Http\Controllers\Validator\AuthVal;
 
 Route::prefix('auth')->group(function () {
 
-    Route::post('/login', function (Request $request){
+    Route::post('/login', function (Request $request) {
         $response = General::$response;
         $response['message'] = 'invalid inputs';
 
         //run validation on inputs
         $error = AuthVal::login($request);
 
-        if($error['status']){
+        if ($error['status']) {
+            //if no error, pass to auth controller
             $response = Auth::login($request);
-
-        }else{
+        } else {
             $response['errorData'] = $error['errors'];
         }
-var_export($response['errorData']['login_id']);
+        
         return response($response);
     });
-
 });
